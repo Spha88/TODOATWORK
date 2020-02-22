@@ -18,11 +18,6 @@ class TaskList extends Component {
         console.log(openModal);
     }
 
-    // submitAddTaskFormHandler = (e) => {
-    //     e.preventDefault();
-    //     this.openAddTaskModalHandler();
-    // }
-
     render() { 
         let taskList;
         taskList = this.state.loading ? <Loading /> : (
