@@ -1,0 +1,33 @@
+.AddTask {
+    padding: 10px;
+    border-radius: 4px;
+    background-color: rgb(246, 246, 246);
+    border: 1px solid rgb(228, 228, 228);
+    margin: 10px auto;
+    transition: all 1s;
+    cursor: pointer;
+    min-width: 200px;
+    width: 50%;
+}
+
+.AddTask:hover {
+    -webkit-box-shadow: 3px 3px 5px 1px rgba(0,0,0,0.31);
+    -moz-box-shadow: 3px 3px 5px 1px rgba(0,0,0,0.31);
+    box-shadow: 3px 3px 5px 1px rgba(0,0,0,0.31);
+    background-color: #fff;
+}
+
+.AddTask header {
+    display: flex;
+    align-content: center;
+}
+
+.AddTask header h5 {
+    flex-grow: 1;
+    margin: 5px 0;
+}
+
+.AddTask:hover header div {
+    background-color: rgb(85, 116, 253);
+    color: rgb(228, 228, 228);
+}

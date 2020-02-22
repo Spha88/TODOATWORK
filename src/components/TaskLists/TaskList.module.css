@@ -1,0 +1,7 @@
+.TaskListHolder {
+    height: 50%;
+}
+.TaskList {
+    list-style: none;
+    padding: 0;
+}

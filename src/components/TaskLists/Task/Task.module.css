@@ -1,0 +1,43 @@
+.Task {
+    padding: 10px 10px 15px 10px;
+    border-radius: 4px;
+    background-color: rgb(246, 246, 246);
+    border: 1px solid rgb(228, 228, 228);
+    margin: 10px auto;
+    transition: all 1s;
+    cursor: pointer;
+}
+
+.Task:hover {
+    -webkit-box-shadow: 3px 3px 5px 1px rgba(0,0,0,0.31);
+    -moz-box-shadow: 3px 3px 5px 1px rgba(0,0,0,0.31);
+    box-shadow: 3px 3px 5px 1px rgba(0,0,0,0.31);
+    background-color: #fff;
+}
+
+.Task header {
+    display: flex;
+    align-content: center;
+}
+
+.Task header h5 {
+    flex-grow: 1;
+    margin: 5px 0;
+}
+
+.Task:hover main {
+    display: block;
+}
+
+.Task main {
+    display: none;
+    border-top: 1px solid rgb(228, 228, 228);
+    margin-top: 15px;
+    transition: all 1s;
+}
+
+.Task main p {
+    margin: 10px 0 0 0;
+    font-size: .9em;
+    line-height: 1.5em;
+}
