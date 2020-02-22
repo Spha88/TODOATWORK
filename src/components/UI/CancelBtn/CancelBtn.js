@@ -1,10 +1,10 @@
 import React from 'react';
 import classes from './CancelBtn.module.css';
 
-const cancelBtn = () => {
+const cancelBtn = (props) => {
 
     return (
-        <button className={classes.CancelBtn}>x</button>
+        <button className={classes.CancelBtn} onClick={props.onClick}>x</button>
     );
 }
 

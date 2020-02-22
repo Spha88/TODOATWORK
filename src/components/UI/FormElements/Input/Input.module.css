@@ -1,0 +1,18 @@
+.InputGroup label {
+    display: block;
+    margin: 10px;
+}
+
+.InputGroup input {
+    width: 100%;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    outline: none;
+    padding: 8px;
+    font-family: inherit;
+    font-size: inherit;
+}
+
+.InputGroup input:focus {
+    outline: none;
+}

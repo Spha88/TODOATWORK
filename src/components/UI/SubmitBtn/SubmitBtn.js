@@ -2,10 +2,10 @@ import React from 'react';
 import classes from './SubmitBtn.module.css';
 import AddBtn from '../AddBtn/AddBtn';
 
-const submitBtn = () =>  {
+const submitBtn = (props) =>  {
 
     return (
-        <button className={classes.SubmitBtn} type="submit">Add Task <AddBtn /></button>
+        <button className={classes.SubmitBtn}> {props.label} <AddBtn /></button>
     );
 
 }
