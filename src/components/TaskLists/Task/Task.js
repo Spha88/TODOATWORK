@@ -1,14 +1,57 @@
-import React from 'react';
+import React, { Component } from 'react';
 import classes from './Task.module.css';
 import OptionsIcon from '../../UI/OptionsIcon/OptionsIcon';
+import Options from '../../Options/Options';
 
-const task = (props) => {
-    return (
-        <li className={classes.Task}>
-            <header><h5 className={classes.Content}>I am a task</h5> <OptionsIcon/></header>
-            <main><p>this is extra information about the task that we are going to do</p></main>
+class Task extends Component {
+
+    state = {
+        openDetails: false,
+        openOptions: false
+    }
+
+    openDetailsHandler = (e) => {
+        if(e.target.localName === 'span' || e.target.localName === 'div') {
+            return;
+        };
+        this.setState({openDetails: !this.state.openDetails});
+    }
+
+    openOptionsHandler = () => {
+        this.setState({openOptions: !this.state.openOptions});
+        console.log('Ready to open options');
+    }
+
+    openOptionsResetHandler = () => {
+        if(this.state.openOptions) {
+            this.setState({openOptions: false});
+        }
+    }
+
+    render(){
+
+        let mainClasses = [classes.Main];
+        if(this.state.openDetails === true) {
+            mainClasses.push(classes.openDetails);
+        }
+
+        return (
+        <li 
+            className={classes.Task} key={this.props.uniqueKey} 
+            onMouseLeave={this.openOptionsResetHandler} 
+            onClickCapture={ this.openDetailsHandler }>
+
+            <header>
+                <h5 className={classes.Content}>{this.props.title}</h5> 
+                <OptionsIcon click={this.openOptionsHandler} optionsOpen={!this.state.openOptions}/> 
+                <Options open={this.state.openOptions} /> 
+            </header>
+            <main className={mainClasses.join(' ')}>
+                <p>{this.props.details}</p>
+            </main>
         </li>
     );
+    }
 }
 
-export default task;
+export default Task;

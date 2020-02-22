@@ -20,21 +20,40 @@ class addTaskForm extends Component {
             // setTimeout(()=>{ formContainerclasses.push(classes.DropFormContainer) }, 1000)
         };
 
+        let response = this.props.response;
+        let form = (
+            <div className={formContainerclasses.join(' ')}>
+                <h3>Add your task</h3>
+                <form onSubmit={this.props.addTask}>
+                    <Input 
+                        value={this.props.titleValue}
+                        title="Title" 
+                        changed={this.props.inputChange}/>
+                    <Textarea 
+                        value={this.props.detailsValue}
+                        title="Details" 
+                        changed={this.props.inputChange}/>
+                    <SubmitBtn label="Add Task"/> 
+                </form>
+                <CancelBtn onClick={ this.props.closeModal }/>
+            </div>
+        );
+
+        let responseClasses = [ classes.Response ]
+
+        if(response) {
+            form="";
+            responseClasses.push(classes.ResponseActive)
+        }
+
         return (
+
             <div className={formClasses.join(' ')}>
-                <div className={formContainerclasses.join(' ')}>
-                    <h3>Add your task</h3>
-                    <form onSubmit={this.props.addTask}>
-                        <Input 
-                            title="Title" 
-                            changed={this.props.inputChange}/>
-                        <Textarea 
-                            placeholder="Enter your datails" 
-                            title="Details" 
-                            changed={this.props.inputChange}/>
-                        <SubmitBtn label="Add Task"/> 
-                    </form>
-                    <CancelBtn onClick={ this.props.closeModal }/>
+                {form}
+                <div className={responseClasses.join(' ')}>
+                    <div className={classes.Sending}>
+                        Task Added
+                    </div>
                 </div>
             </div>
         );

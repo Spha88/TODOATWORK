@@ -1,0 +1,28 @@
+.Options {
+    -webkit-box-shadow: 3px 3px 5px 1px rgba(0,0,0,0.31);
+    -moz-box-shadow: 3px 3px 5px 1px rgba(0,0,0,0.31);
+    box-shadow: 3px 3px 5px 1px rgba(0,0,0,0.31);
+    border-radius: 4px;
+    padding: 0 5px;
+    border: 1px solid rgb(228, 228, 228);
+    align-self: center;
+    color: rgb(114, 114, 114);
+    position: absolute;
+    right: 10px;
+    display: none;
+}
+
+.OpenOptions {
+    display: block;
+}
+.Options span {
+    display: inline-block;
+    font-size: .7em;
+    font-weight: 700;
+    padding: 5px 5px;
+    transition: all 1s;
+}
+
+.Options span:hover {
+    color: #000
+}

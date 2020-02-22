@@ -8,7 +8,7 @@
     height: 100%;
     border-radius: 5px;
     box-sizing: border-box;
-    /* background-color: rgba(233, 233, 233, .9); */
+    background-color: rgba(233, 233, 233, .9);
     align-items: center;
     opacity: 0;
     display: flex;
@@ -74,4 +74,27 @@
 
 .FormGroup input:focus {
     outline: none;
+}
+
+
+/* response modal style */
+.Response {
+    width: 100%;
+    position: absolute;
+    bottom: 1000;
+    background-color: #fff;
+    -webkit-box-shadow: 5px 5px 18px 0px rgba(0,0,0,0.44);
+    -moz-box-shadow: 5px 5px 18px 0px rgba(0,0,0,0.44);
+    box-shadow: 5px 5px 18px 0px rgba(0,0,0,0.44);
+    border-radius: 4px;
+    padding: 10px 15px;
+    box-sizing: border-box;
+    transition: all 2s ease;
+    opacity: 0;
+}
+
+.ResponseActive {
+    position: relative;
+    bottom: 0;
+    opacity: 1;
 }
