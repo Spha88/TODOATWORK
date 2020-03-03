@@ -9,6 +9,7 @@ import axios from 'axios';
 class TaskList extends Component {
     state = { 
         loading: true,
+        errorLoading: false,
         openAddTaskModal: false,
         editMode: false,
         editKey: '',
@@ -27,9 +28,12 @@ class TaskList extends Component {
         if(this.state.loading)
         axios.get('tasks.json')
             .then(res => {
-                this.setState({ loading: false, tasks: res.data })
+                this.setState({ loading: false, tasks: res.data, errorLoading: false })
             })
-            .catch(error => console.log(error));
+            .catch(error => {
+                console.log(error.status);
+                this.setState({ errorLoading: true, loading: false });
+            });
     }
 
     addTaskHandler = (e) => {
@@ -129,11 +133,24 @@ class TaskList extends Component {
     render() { 
 
         let taskList = <Loading />;
+
+        let task;
+
+        if( this.state.errorLoading === true ) { 
+            task = "Error loading, please make sure you are connected to the internet" ;
+            taskList = (
+                <ul className={classes.TaskList}>
+                    {task}
+                    <AddTaskBtn
+                        openAddTaskModal={this.toggleAddTaskModalHandler} />
+                </ul>
+            );
+            
+        }
         
-        if(this.state.loading === false) {
-            let task;
+        if( this.state.loading === false && this.state.errorLoading === false) {
+            
             let tasks = this.state.tasks;
-            console.log(tasks);
             if( tasks === null ){
                 task = (<p>No task found, add a task</p>)
             } else {
@@ -149,7 +166,6 @@ class TaskList extends Component {
                     );
                 } );
             }
-            
 
             taskList = (
                 <ul className={classes.TaskList}>
