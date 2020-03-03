@@ -17,14 +17,13 @@ class addTaskForm extends Component {
         if(openAddTaskModal){
             formClasses.push(classes.AddTask);
             formContainerclasses.push(classes.DropFormContainer)
-            // setTimeout(()=>{ formContainerclasses.push(classes.DropFormContainer) }, 1000)
         };
 
         let response = this.props.response;
         let form = (
             <div className={formContainerclasses.join(' ')}>
-                <h3>Add your task</h3>
-                <form onSubmit={this.props.addTask}>
+                <h3> {this.props.editMode ? 'Edit this task' : 'Add Task'} </h3>
+                <form onSubmit={ this.props.addTask }>
                     <Input 
                         value={this.props.titleValue}
                         title="Title" 
@@ -33,7 +32,7 @@ class addTaskForm extends Component {
                         value={this.props.detailsValue}
                         title="Details" 
                         changed={this.props.inputChange}/>
-                    <SubmitBtn label="Add Task"/> 
+                    <SubmitBtn label={this.props.editMode ? 'Save' : 'Add Task' }/> 
                 </form>
                 <CancelBtn onClick={ this.props.closeModal }/>
             </div>
@@ -52,7 +51,7 @@ class addTaskForm extends Component {
                 {form}
                 <div className={responseClasses.join(' ')}>
                     <div className={classes.Sending}>
-                        Task Added
+                        Changes saved
                     </div>
                 </div>
             </div>

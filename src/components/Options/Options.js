@@ -11,8 +11,8 @@ const options = (props) => {
 
     return (
         <div className={optionsClasses.join(' ')}>
-            <span>Edit</span>
-            <span>Delete</span>
+            <span onClick={props.edit}>Edit</span>
+            <span onClick={props.delete}>Delete</span>
         </div>
     );
 }

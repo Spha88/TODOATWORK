@@ -19,7 +19,6 @@ class Task extends Component {
 
     openOptionsHandler = () => {
         this.setState({openOptions: !this.state.openOptions});
-        console.log('Ready to open options');
     }
 
     openOptionsResetHandler = () => {
@@ -44,7 +43,10 @@ class Task extends Component {
             <header>
                 <h5 className={classes.Content}>{this.props.title}</h5> 
                 <OptionsIcon click={this.openOptionsHandler} optionsOpen={!this.state.openOptions}/> 
-                <Options open={this.state.openOptions} /> 
+                <Options 
+                    open={this.state.openOptions}
+                    edit={this.props.edit}  
+                    delete={this.props.delete}/> 
             </header>
             <main className={mainClasses.join(' ')}>
                 <p>{this.props.details}</p>
