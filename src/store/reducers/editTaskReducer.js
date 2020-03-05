@@ -13,6 +13,17 @@ const editTaskReducer = (state = initialState, action) => {
                 openModal: true,
                 response: false
             }
+        case actionTypes.CLOSE_MODAL:
+            return {
+                ...state,
+                openModal: false,
+                response: true
+            }
+        case actionTypes.ADDED_TASK:
+            return {
+                ...state,
+                openModal: false
+            }
 
         default: return state;
     }

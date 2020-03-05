@@ -1,5 +1,5 @@
 export { auth } from './authAction';
 
-export { loadTask, addTask } from './taskListAction';
+export { loadTask } from './taskListAction';
 
-export { openModal } from './editTaskActions';
+export { openModal, closeModal, addTask } from './editTaskActions';

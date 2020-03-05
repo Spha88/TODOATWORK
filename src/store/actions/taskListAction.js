@@ -37,22 +37,4 @@ export const loadTask = () => {
     }
 }
 
-export const addedTask = () => {
-    return {
-        type: actionsTypes.ADDED_TASK
-    }
-}
-
-export const addTask = (data) => {
-    return dispatch => {
-        axios.post( 'tasks.json', data )
-            .then( res => {
-                dispatch(addedTask());
-                dispatch(loadTask());
-                return true;
-            })
-            .catch(error => console.log(error));
-    }
-}
-
 

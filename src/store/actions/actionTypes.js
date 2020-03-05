@@ -8,5 +8,6 @@ export const LOADING_TASK_COMPLETE = 'LOADING_TASK_COMPLETE';
 export const LOADING_TASK_FAILED = 'LOADING_TASK_FAILED';
 
 export const OPEN_MODAL = 'OPEN_MODAL';
+export const CLOSE_MODAL = 'CLOSE_MODAL';
 
 export const ADDED_TASK = 'ADDED_TASK';

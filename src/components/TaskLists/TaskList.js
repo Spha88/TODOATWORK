@@ -5,7 +5,7 @@ import Loading from '../UI/Loading/Loading';
 import AddTaskForm from '../../components/AddTaskForm/AddTaskForm';
 import axios from 'axios';
 import classes from './TaskList.module.css';
-import { loadTask, addTask, openModal } from '../../store/actions/index';
+import { loadTask, addTask, openModal, closeModal } from '../../store/actions/index';
 import { connect } from 'react-redux';
 
 class TaskList extends Component {
@@ -66,14 +66,14 @@ class TaskList extends Component {
         }
 
         //Add task
-        if( this.props.onAddTask(data) ){
+        const load = this.props.onTaskListLoad;
+        if( this.props.onAddTask( data, load )){
             this.setState({
                 taskTitle: '',
                 taskDetails: '',
-                response: true,
-                loading: true
+                // response: true,
+                // loading: true
             })
-            setTimeout( this.toggleAddTaskModalHandler , 3000)
         }
         // axios.post( 'tasks.json', data )
         //     .then( res => {
@@ -121,26 +121,18 @@ class TaskList extends Component {
         // console.log(e.target.value);
     }
     
-    toggleAddTaskModalHandler = () => {
-        let openModal = this.state.openAddTaskModal ;
+    closeModal = () => {
 
-        if(openModal){ //if the modal is open, clean up the state and close. 
+        let openModal = this.props.openAddTaskModal ;
+        if( openModal){ //if the modal is open, clean up the state and close. 
+            this.props.onCloseModal();
             this.setState({
                 taskTitle: '',
                 taskDetails: '',
                 editMode: false,
-                editKey: '',
-                openAddTaskModal: !openModal, 
-                response: false
+                editKey: ''
             })
-            return;
         }
-
-        this.setState({
-            openAddTaskModal: !openModal, 
-            response: false
-        });
-        // console.log(openModal);
     }
 
     render() { 
@@ -202,7 +194,7 @@ class TaskList extends Component {
 
                     addTask = { this.addTaskHandler } 
                     inputChange = {this.inputChangeHandler} //handles both title and details input
-                    closeModal = {this.toggleAddTaskModalHandler} // closes the modal by changing openAddTaskModal to true
+                    closeModal = {this.closeModal} // closes the modal by changing openAddTaskModal to false
                     openAddTaskModal = { this.props.openAddTaskModal } //Sends true or false to the modal - modal opens if true and closes if flase
                     />
                     
@@ -233,8 +225,9 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         onTaskListLoad: () => dispatch(loadTask()),
-        onAddTask: (data) => dispatch(addTask(data)),
-        onOpenModal: () => dispatch(openModal())
+        onAddTask: (data, loadTask) => dispatch(addTask(data, loadTask )),
+        onOpenModal: () => dispatch(openModal()),
+        onCloseModal: () => dispatch(closeModal())
     }
 }
  
