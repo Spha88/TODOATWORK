@@ -30,6 +30,7 @@ export const auth = (userInfo) => {
 
         axios.post( url, authData )
             .then(res => {
+                dispatch(authSignIn());
                 console.log(res);
             })
             .catch(err => {

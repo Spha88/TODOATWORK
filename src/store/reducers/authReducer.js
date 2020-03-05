@@ -1,18 +1,21 @@
 import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
-    userName: 'Spha'
+    signIn: false
 }
 
 const authReducer = (state = initialState, action ) => {
         switch (action.type) {
             case actionTypes.AUTH_START:
-                    console.log(actionTypes.AUTH_START);
                     return {
                         ...state,
-                        userName: 'zola'
+                        signIn: false
                     }
-        
+            case actionTypes.AUTH_SIGN_IN: 
+                    return {
+                        ...state,
+                        signIn: true
+                    }
             default: return state;
         }
 }

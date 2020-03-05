@@ -6,6 +6,7 @@ import { auth } from '../../store/actions/index';
 
 import TextField from '@material-ui/core/TextField';
 import SubmitBtn from '../../components/UI/SubmitBtn/SubmitBtn'
+import { Redirect, Route } from 'react-router-dom';
 
 class Auth extends Component {
 
@@ -46,9 +47,17 @@ class Auth extends Component {
     
     render() { 
         const styles = {'margin': '0 0 8px 0'};
+        if(this.props.signedIn){
+            return (
+                <Route>
+                    <Redirect to="/task-list" />
+                </Route>
+            );
+        }
         return ( 
             <div className={classes.Auth}>
                 <h2>Log in</h2>
+                <p>{this.props.signedIn ? 'You have logged in' : 'you need to log in'}</p>
                 <form className={classes.Form} onSubmit={this.onSignInHandler}>
                     <TextField
                         onChange = { this.onInputChangeHandler }
@@ -81,7 +90,7 @@ class Auth extends Component {
 }
 const mapStateToProps = state => {
     return {
-        userName: state.userName
+        signedIn: state.signIn
     }
 }
 
