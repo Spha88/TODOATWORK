@@ -90,7 +90,7 @@ class Auth extends Component {
 }
 const mapStateToProps = state => {
     return {
-        signedIn: state.signIn
+        signedIn: state.auth.signIn
     }
 }
 

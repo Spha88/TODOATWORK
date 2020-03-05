@@ -5,6 +5,8 @@ import Loading from '../UI/Loading/Loading';
 import AddTaskForm from '../../components/AddTaskForm/AddTaskForm';
 import axios from 'axios';
 import classes from './TaskList.module.css';
+import {loadTask} from '../../store/actions/index';
+import { connect } from 'react-redux';
 
 class TaskList extends Component {
     state = { 
@@ -25,6 +27,7 @@ class TaskList extends Component {
     }
 
     fetchTask = () => {
+        this.props.onTaskListLoad();
         if(this.state.loading)
         axios.get('tasks.json')
             .then(res => {
@@ -205,5 +208,11 @@ class TaskList extends Component {
         this.fetchTask();
     }
 }
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onTaskListLoad: () => dispatch(loadTask())
+    }
+}
  
-export default TaskList;
+export default connect(null, mapDispatchToProps)(TaskList);
