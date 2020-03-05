@@ -11,3 +11,7 @@ export const OPEN_MODAL = 'OPEN_MODAL';
 export const CLOSE_MODAL = 'CLOSE_MODAL';
 
 export const ADDED_TASK = 'ADDED_TASK';
+
+export const EDIT_TASK_START = 'EDIT_TASK_START';
+export const EDIT_TASK_CONTENT = 'EDIT_TASK_CONTENT';
+export const EDIT_TASK_SAVE = 'EDIT_TASK_SAVE';

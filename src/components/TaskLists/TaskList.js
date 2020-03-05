@@ -5,7 +5,7 @@ import Loading from '../UI/Loading/Loading';
 import AddTaskForm from '../../components/AddTaskForm/AddTaskForm';
 import axios from 'axios';
 import classes from './TaskList.module.css';
-import { loadTask, addTask, openModal, closeModal } from '../../store/actions/index';
+import { loadTask, addTask, openModal, closeModal, editTaskStart, editingTaskContent, editTaskSave } from '../../store/actions/index';
 import { connect } from 'react-redux';
 
 class TaskList extends Component {
@@ -42,31 +42,34 @@ class TaskList extends Component {
     addTaskHandler = (e) => {
         e.preventDefault();
         let data = {
-            title: this.state.taskTitle,
-            details: this.state.taskDetails
+            title: this.props.taskTitle,
+            details: this.props.taskDetails
         }
+        const load = this.props.onTaskListLoad;
 
         //Edit Task
-        if(this.state.editMode === true) {
-            axios.patch(`tasks/${this.state.editKey}/.json`, data )
-                .then(res => {
-                    console.log(res);
-                    this.setState({
-                        taskTitle: '',
-                        taskDetails: '',
-                        response: true,
-                        loading: true,
-                        editMode: false,
-                        editKey: ''
-                    })
-                    setTimeout( this.toggleAddTaskModalHandler , 3000)
-                })
-                .catch(error => console.log(error))
+        if(this.props.editMode === true) {
+            this.props.onEditTaskSave(this.props.editKey, data, load );
+            // axios.patch(`tasks/${this.state.editKey}/.json`, data )
+            //     .then(res => {
+            //         console.log(res);
+            //         this.props.onCloseModal();
+            //         this.setState({
+            //             taskTitle: '',
+            //             taskDetails: '',
+            //             response: true,
+            //             loading: true,
+            //             editMode: false,
+            //             editKey: ''
+            //         });
+                    
+            //     })
+            //     .catch(error => console.log(error))
                 return;
         }
 
         //Add task
-        const load = this.props.onTaskListLoad;
+        
         if( this.props.onAddTask( data, load )){
             this.setState({
                 taskTitle: '',
@@ -75,19 +78,6 @@ class TaskList extends Component {
                 // loading: true
             })
         }
-        // axios.post( 'tasks.json', data )
-        //     .then( res => {
-        //         console.log(res);
-        //         this.setState({
-        //             taskTitle: '',
-        //             taskDetails: '',
-        //             response: true,
-        //             loading: true
-        //         })
-        //         setTimeout( this.toggleAddTaskModalHandler , 3000)
-                
-        //     })
-        //     .catch(error => console.log(error));
     }
 
     editTaskHandler = (key) => {
@@ -98,8 +88,7 @@ class TaskList extends Component {
             editKey: key,
             editMode: true //tell the form to show edit button and the title shouldbe 'Edit this task'
         });
-
-        this.toggleAddTaskModalHandler(); //Open the modal
+        this.props.onOpenModal(); //Open the modal
     }
 
     deleteTaskHandler = ( key ) => {
@@ -166,7 +155,7 @@ class TaskList extends Component {
                             title={tasks[taskKey].title}
                             details={tasks[taskKey].details}
     
-                            edit={ () => this.editTaskHandler(taskKey) }
+                            edit={ () => this.props.onEditTask( taskKey, this.props.tasks ) }
                             delete={ () => this.deleteTaskHandler( taskKey ) } />
                     );
                 } );
@@ -187,13 +176,13 @@ class TaskList extends Component {
                 {taskList}
 
                 <AddTaskForm
-                    titleValue = {this.state.taskTitle}
-                    detailsValue = {this.state.taskDetails}
+                    titleValue = {this.props.taskTitle}
+                    detailsValue = {this.props.taskDetails}
                     response = { this.props.response}
-                    editMode = {this.state.editMode}
+                    editMode = {this.props.editMode}
 
                     addTask = { this.addTaskHandler } 
-                    inputChange = {this.inputChangeHandler} //handles both title and details input
+                    inputChange = {this.props.onEditingTaskContent} //handles both title and details input
                     closeModal = {this.closeModal} // closes the modal by changing openAddTaskModal to false
                     openAddTaskModal = { this.props.openAddTaskModal } //Sends true or false to the modal - modal opens if true and closes if flase
                     />
@@ -218,7 +207,12 @@ const mapStateToProps = state => {
         errorLoading: state.taskList.errorLoading,
 
         openAddTaskModal: state.editTask.openModal,
-        response: state.editTask.response
+        response: state.editTask.response,
+
+        editMode: state.editTask.editMode,
+        taskTitle: state.editTask.taskTitle,
+        taskDetails: state.editTask.taskDetails,
+        editKey: state.editTask.editKey
     }
 }
 
@@ -227,7 +221,10 @@ const mapDispatchToProps = dispatch => {
         onTaskListLoad: () => dispatch(loadTask()),
         onAddTask: (data, loadTask) => dispatch(addTask(data, loadTask )),
         onOpenModal: () => dispatch(openModal()),
-        onCloseModal: () => dispatch(closeModal())
+        onCloseModal: () => dispatch(closeModal()),
+        onEditTask: (key, tasks) => dispatch(editTaskStart(key, tasks)),
+        onEditingTaskContent: (e) => dispatch(editingTaskContent(e)),
+        onEditTaskSave: (key, data, loadTask) => dispatch(editTaskSave(key, data, loadTask))
     }
 }
  
