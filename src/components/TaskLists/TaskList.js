@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import Task from './Task/Task';
-import classes from './TaskList.module.css';
 import AddTaskBtn from '../AddTaskBtn/AddTaskBtn';
 import Loading from '../UI/Loading/Loading';
 import AddTaskForm from '../../components/AddTaskForm/AddTaskForm';
 import axios from 'axios';
+import classes from './TaskList.module.css';
 
 class TaskList extends Component {
     state = { 
