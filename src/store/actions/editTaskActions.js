@@ -33,11 +33,13 @@ export const addTask = (data, loadTask ) => {
 }
 
 export const editTaskStart = (key, tasks) => { //sends information to store about the task to be edited
-    console.log(key);
-    return  {
-        type: actionTypes.EDIT_TASK_START,
-        key: key,
-        tasks: tasks
+    return dispatch => {
+        dispatch(openModal());
+        dispatch({
+            type: actionTypes.EDIT_TASK_START,
+            key: key,
+            tasks: tasks
+        })
     }
 }
 

@@ -1,38 +1,28 @@
-import * as actionsTypes from './actionTypes';
+import * as actionTypes from './actionTypes';
 import axios from 'axios';
 
 export const loadingTaskStart = () => {
     return {
-        type: actionsTypes.LOADING_TAKS_START
+        type: actionTypes.LOADING_TASKS_START
     }
 }
-export const loadingTask = (tasks) => {
+export const loadingTaskComplete = (tasks) => {
     return {
-        type: actionsTypes.LOAD_TASKS,
+        type: actionTypes.LOADING_TASKS_COMPLETE,
         tasks: tasks
     }
 }
-export const loadingTaskComplete = () => {
-    return {
-        type: actionsTypes.LOADING_TASK_COMPLETE
-    }
-}
-export const loadingTaskFailed = () => {
-    return {
-        type: actionsTypes.LOADING_TASK_FAILED
-    }
-}
+
 export const loadTask = () => {
     return dispatch => {
         dispatch(loadingTaskStart());
         axios.get('tasks.json')
             .then(res => {
-                dispatch(loadingTask(res.data));
-                dispatch(loadingTaskComplete())
+                dispatch(loadingTaskComplete(res.data));
             })
             .catch(error => {
                 console.log(error.status);
-                dispatch(loadingTaskFailed());
+                dispatch({ type: actionTypes.LOADING_TASK_FAILED });
             });
     }
 }

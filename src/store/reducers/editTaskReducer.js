@@ -3,7 +3,6 @@ import * as actionTypes from '../actions/actionTypes';
 const initialState = {
     openModal: false,
     response: false,
-
     editMode: false,
     taskTitle: '',
     taskDetails: '',
@@ -12,31 +11,24 @@ const initialState = {
 
 const editTaskReducer = (state = initialState, action) => {
     switch (action.type) {
-        case actionTypes.OPEN_MODAL:
-            return {
-                ...state,
-                openModal: true,
-                response: false
-            }
-        case actionTypes.CLOSE_MODAL:
-            return {
-                ...state,
-                openModal: false,
-                response: false
-            }
-        case actionTypes.ADDED_TASK: 
-            return {
-                ...state,
-                response: true
-            }
+        case actionTypes.OPEN_MODAL: return openModal(state);
+        case actionTypes.CLOSE_MODAL: return closeModal(state, action);
+        case actionTypes.ADDED_TASK: return addTask(state);
         case actionTypes.EDIT_TASK_START: return editTaskStart(state, action);
         case actionTypes.EDIT_TASK_CONTENT: return editingTaskContent(state, action);
         case actionTypes.EDIT_TASK_SAVE: return editTaskSave(state);
-
         default: return state;
     }
 }
-
+const openModal = (state) => {
+    return { ...state, openModal: true, response: false }
+}
+const closeModal = (state) => {
+    return {...state, openModal: false, response: false, taskTitle: '', taskDetails: '' }
+}
+const addTask = (state) => {
+    return { ...state, response: true, taskTitle: '', taskDetails: '' }
+}
 const editTaskStart = (state, action ) => { //Open the modal with details of task to be edited
     let taskToEdit = {...action.tasks[action.key]};
     return {
@@ -44,8 +36,7 @@ const editTaskStart = (state, action ) => { //Open the modal with details of tas
         taskTitle: taskToEdit.title,
         taskDetails: taskToEdit.details,
         editKey: action.key,
-        editMode: true,
-        openModal: true
+        editMode: true
     }
 }
 const editingTaskContent = (state, action) => { //updates state when the form inputs changed
@@ -55,17 +46,14 @@ const editingTaskContent = (state, action) => { //updates state when the form in
         default: return state;
     }
 }
-const editTaskSave = (state) => {
+const editTaskSave = (state) => { //reset state defaults
     return {
         ...state,
         taskTitle: '',
         taskDetails: '',
         editKey: '',
         editMode: false,
-
         response: false 
     }
 }
-
-
 export default editTaskReducer;

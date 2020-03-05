@@ -4,7 +4,6 @@ body {
   'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
   sans-serif;
   background: rgb(240, 240, 240);
-  padding: 20px 10px;
 }
 
 @media only screen and (max-width: 768px) {

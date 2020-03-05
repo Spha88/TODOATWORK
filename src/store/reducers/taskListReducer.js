@@ -9,20 +9,15 @@ const initialState = {
 
 const taskListReducer = (state = initialState, action) => {
     switch (action.type) {
-        case actionTypes.LOADING_TAKS_START: 
+        case actionTypes.LOADING_TASKS_START: 
             return {
                 ...state,
                 loading: true
             }
-        case actionTypes.LOAD_TASKS:
+        case actionTypes.LOADING_TASKS_COMPLETE:
             return {
                 ...state,
                 tasks: action.tasks,
-                errorLoading: false
-            }
-        case actionTypes.LOADING_TASK_COMPLETE: 
-            return {
-                ...state,
                 loading: false,
                 errorLoading: false
             }

@@ -1,13 +1,26 @@
+.AddBtnContainer {
+    width: 100%;
+    height: 15%;
+    position: absolute;
+    background: transparent;
+    background: rgb(255,255,255);
+    background: linear-gradient(180deg, rgba(255,255,255,0.27494747899159666) 0%, rgba(255,255,255,1) 80%, rgba(255,255,255,1) 100%);
+    bottom: 0;
+    padding: 10px 5px 5px 5px;
+}
+
 .AddTask {
     padding: 10px;
     border-radius: 4px;
     background-color: rgb(246, 246, 246);
     border: 1px solid rgb(228, 228, 228);
-    margin: 10px auto;
+    display: block;
     transition: all 1s;
     cursor: pointer;
     min-width: 200px;
-    width: 50%;
+    box-sizing: border-box;
+    margin: 0 auto;
+    outline: none;
 }
 
 .AddTask:hover {
@@ -15,11 +28,6 @@
     -moz-box-shadow: 3px 3px 5px 1px rgba(0,0,0,0.31);
     box-shadow: 3px 3px 5px 1px rgba(0,0,0,0.31);
     background-color: #fff;
-}
-
-.AddTask header {
-    display: flex;
-    align-content: center;
 }
 
 .AddTask header h5 {

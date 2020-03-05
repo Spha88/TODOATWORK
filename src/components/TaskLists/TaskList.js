@@ -37,25 +37,19 @@ class TaskList extends Component {
     }
 
     render() { 
+
         let taskList = <Loading />;
-        let task;
-        if( this.props.errorLoading === true ) { 
-            task = "Error loading, please make sure you are connected to the internet" ;
-            taskList = (
-                <ul className={classes.TaskList}>
-                    {task}
-                    <AddTaskBtn
-                        openAddTaskModal={this.toggleAddTaskModalHandler} />
-                </ul>
-            );
+
+        if (this.props.errorLoading === true ) {
+            taskList = <p>Error loading please make sure you are connected to the internet</p>
         }
         
         if( this.props.loading === false && this.props.errorLoading === false ) {
             let tasks = this.props.tasks;
-            if( tasks === null ){
-                task = (<p>No task found, add a task</p>)
+            if ( tasks === null ){
+                taskList = (<p>No task found, add a task</p>)
             } else {
-                task = Object.keys(tasks).map( taskKey => {
+                taskList = Object.keys(tasks).map( taskKey => {
                     return (
                         <Task
                             key = {taskKey}
@@ -67,19 +61,15 @@ class TaskList extends Component {
                     );
                 } );
             }
-
-            taskList = (
-                <ul className={classes.TaskList}>
-                    {task}
-                    <AddTaskBtn
-                        openAddTaskModal={this.props.onOpenModal} />
-                </ul>
-            );
         }
 
         return ( 
             <div className={classes.TaskListHolder}>
-                {taskList}
+
+                <ul className={classes.TaskList}> { taskList } </ul>
+                
+                <AddTaskBtn openAddTaskModal={this.props.onOpenModal} />
+
                 <AddTaskForm
                     titleValue = {this.props.taskTitle}
                     detailsValue = {this.props.taskDetails}
