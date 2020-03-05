@@ -8,7 +8,7 @@
     height: 100%;
     border-radius: 5px;
     box-sizing: border-box;
-    background-color: rgba(233, 233, 233, .9);
+    /* background-color: rgba(233, 233, 233, .9); */
     align-items: center;
     opacity: 0;
     display: flex;
