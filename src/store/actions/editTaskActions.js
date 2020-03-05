@@ -51,7 +51,7 @@ export const editingTaskContent = (e) => { //update the store everytime an input
     }
 }
 
-export const editTaskSave = (key, data, load) => { //send the changes to the database
+export const editTaskSave = (key, data, load) => { //send the changes to the database and load tasks
     return dispatch => {
         axios.patch(`tasks/${key}/.json`, data )
                 .then(res => {
