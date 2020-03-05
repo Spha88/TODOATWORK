@@ -23,8 +23,9 @@ export const addTask = (data, loadTask ) => {
     return dispatch => {
         axios.post( 'tasks.json', data )
             .then( res => {
-                dispatch(addedTask());
+                dispatch(closeModal());
                 dispatch(loadTask());
+                
                 return true;
             })
             .catch(error => console.log(error));
