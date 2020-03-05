@@ -14,10 +14,12 @@ import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
 import authReducer from './store/reducers/authReducer';
 import taskListReducer from './store/reducers/taskListReducer';
+import editTaskReducer from './store/reducers/editTaskReducer';
 
 const reducers = combineReducers({
     auth: authReducer,
-    taskList: taskListReducer
+    taskList: taskListReducer,
+    editTask: editTaskReducer
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

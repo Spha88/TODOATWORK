@@ -5,7 +5,7 @@ import Loading from '../UI/Loading/Loading';
 import AddTaskForm from '../../components/AddTaskForm/AddTaskForm';
 import axios from 'axios';
 import classes from './TaskList.module.css';
-import {loadTask} from '../../store/actions/index';
+import { loadTask, addTask, openModal } from '../../store/actions/index';
 import { connect } from 'react-redux';
 
 class TaskList extends Component {
@@ -27,7 +27,7 @@ class TaskList extends Component {
     }
 
     fetchTask = () => {
-        this.props.onTaskListLoad();
+        this.props.onTaskListLoad(); //done through redux
         if(this.state.loading)
         axios.get('tasks.json')
             .then(res => {
@@ -66,18 +66,28 @@ class TaskList extends Component {
         }
 
         //Add task
-        axios.post( 'tasks.json', data )
-            .then( res => {
-                console.log(res);
-                this.setState({
-                    taskTitle: '',
-                    taskDetails: '',
-                    response: true,
-                    loading: true
-                })
-                setTimeout( this.toggleAddTaskModalHandler , 3000)
+        if( this.props.onAddTask(data) ){
+            this.setState({
+                taskTitle: '',
+                taskDetails: '',
+                response: true,
+                loading: true
             })
-            .catch(error => console.log(error));
+            setTimeout( this.toggleAddTaskModalHandler , 3000)
+        }
+        // axios.post( 'tasks.json', data )
+        //     .then( res => {
+        //         console.log(res);
+        //         this.setState({
+        //             taskTitle: '',
+        //             taskDetails: '',
+        //             response: true,
+        //             loading: true
+        //         })
+        //         setTimeout( this.toggleAddTaskModalHandler , 3000)
+                
+        //     })
+        //     .catch(error => console.log(error));
     }
 
     editTaskHandler = (key) => {
@@ -139,7 +149,7 @@ class TaskList extends Component {
 
         let task;
 
-        if( this.state.errorLoading === true ) { 
+        if( this.props.errorLoading === true ) { 
             task = "Error loading, please make sure you are connected to the internet" ;
             taskList = (
                 <ul className={classes.TaskList}>
@@ -151,9 +161,9 @@ class TaskList extends Component {
             
         }
         
-        if( this.state.loading === false && this.state.errorLoading === false) {
+        if( this.props.loading === false && this.props.errorLoading === false) {
             
-            let tasks = this.state.tasks;
+            let tasks = this.props.tasks;
             if( tasks === null ){
                 task = (<p>No task found, add a task</p>)
             } else {
@@ -174,7 +184,7 @@ class TaskList extends Component {
                 <ul className={classes.TaskList}>
                     {task}
                     <AddTaskBtn
-                        openAddTaskModal={this.toggleAddTaskModalHandler} />
+                        openAddTaskModal={this.props.onOpenModal} />
                 </ul>
             );
         }
@@ -187,13 +197,13 @@ class TaskList extends Component {
                 <AddTaskForm
                     titleValue = {this.state.taskTitle}
                     detailsValue = {this.state.taskDetails}
-                    response = { this.state.response}
+                    response = { this.props.response}
                     editMode = {this.state.editMode}
 
                     addTask = { this.addTaskHandler } 
                     inputChange = {this.inputChangeHandler} //handles both title and details input
                     closeModal = {this.toggleAddTaskModalHandler} // closes the modal by changing openAddTaskModal to true
-                    openAddTaskModal = { this.state.openAddTaskModal } //Sends true or false to the modal - modal opens if true and closes if flase
+                    openAddTaskModal = { this.props.openAddTaskModal } //Sends true or false to the modal - modal opens if true and closes if flase
                     />
                     
             </div>
@@ -201,18 +211,31 @@ class TaskList extends Component {
     }
 
     componentDidMount(){
-        this.fetchTask();
+         this.fetchTask();
     }
 
     componentDidUpdate(){
-        this.fetchTask();
+        // this.fetchTask();
+    }
+}
+
+const mapStateToProps = state => {
+    return {
+        loading: state.taskList.loading,
+        tasks: state.taskList.tasks,
+        errorLoading: state.taskList.errorLoading,
+
+        openAddTaskModal: state.editTask.openModal,
+        response: state.editTask.response
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        onTaskListLoad: () => dispatch(loadTask())
+        onTaskListLoad: () => dispatch(loadTask()),
+        onAddTask: (data) => dispatch(addTask(data)),
+        onOpenModal: () => dispatch(openModal())
     }
 }
  
-export default connect(null, mapDispatchToProps)(TaskList);
+export default connect(mapStateToProps, mapDispatchToProps)(TaskList);

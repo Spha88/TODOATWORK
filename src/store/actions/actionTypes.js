@@ -4,3 +4,9 @@ export const AUTH_SIGN_IN = 'AUTH_SIGN_IN';
 
 export const LOADING_TAKS_START = 'LOADING_TAKS_START';
 export const LOAD_TASKS = 'LOAD_TAKS';
+export const LOADING_TASK_COMPLETE = 'LOADING_TASK_COMPLETE';
+export const LOADING_TASK_FAILED = 'LOADING_TASK_FAILED';
+
+export const OPEN_MODAL = 'OPEN_MODAL';
+
+export const ADDED_TASK = 'ADDED_TASK';
