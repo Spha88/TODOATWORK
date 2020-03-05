@@ -63,3 +63,16 @@ export const editTaskSave = (key, data, load) => { //send the changes to the dat
                 .catch(error => console.log(error))
     }
 }
+
+export const deleteTask = (key, load) => {
+    return dispatch => {
+        axios.delete(`tasks/${key}.json` )
+            .then(res => {
+                dispatch(load());
+                console.log(res);
+            })
+            .catch(error => {
+                console.log(error);
+            })
+    }
+}

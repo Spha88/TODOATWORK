@@ -5,8 +5,12 @@ import Loading from '../UI/Loading/Loading';
 import AddTaskForm from '../../components/AddTaskForm/AddTaskForm';
 import axios from 'axios';
 import classes from './TaskList.module.css';
-import { loadTask, addTask, openModal, closeModal, editTaskStart, editingTaskContent, editTaskSave } from '../../store/actions/index';
 import { connect } from 'react-redux';
+import { 
+    loadTask, addTask, openModal, closeModal, editTaskStart, 
+    editingTaskContent, editTaskSave, deleteTask
+} from '../../store/actions/index';
+
 
 class TaskList extends Component {
 
@@ -17,7 +21,6 @@ class TaskList extends Component {
             details: this.props.taskDetails
         }
         const load = this.props.onTaskListLoad;
-
         this.props.editMode === true ? this.props.onEditTaskSave(this.props.editKey, data, load ) : //Edit Task
         this.props.onAddTask( data, load ); //Adding task
     }
@@ -47,7 +50,7 @@ class TaskList extends Component {
             );
         }
         
-        if( this.props.loading === false && this.props.errorLoading === false) {
+        if( this.props.loading === false && this.props.errorLoading === false ) {
             let tasks = this.props.tasks;
             if( tasks === null ){
                 task = (<p>No task found, add a task</p>)
@@ -59,8 +62,8 @@ class TaskList extends Component {
                             title={tasks[taskKey].title}
                             details={tasks[taskKey].details}
     
-                            edit={ () => this.props.onEditTask( taskKey, this.props.tasks ) }
-                            delete={ () => this.deleteTaskHandler( taskKey ) } />
+                            edit={ () => this.props.onEditTaskStart( taskKey, this.props.tasks ) }
+                            delete={ () => this.props.onDeleteTask( taskKey, this.props.onTaskListLoad ) } />
                     );
                 } );
             }
@@ -119,9 +122,10 @@ const mapDispatchToProps = dispatch => {
         onAddTask: (data, loadTask) => dispatch(addTask(data, loadTask )),
         onOpenModal: () => dispatch(openModal()),
         onCloseModal: () => dispatch(closeModal()),
-        onEditTask: (key, tasks) => dispatch(editTaskStart(key, tasks)),
+        onEditTaskStart: (key, tasks) => dispatch(editTaskStart(key, tasks)),
         onEditingTaskContent: (e) => dispatch(editingTaskContent(e)),
-        onEditTaskSave: (key, data, loadTask) => dispatch(editTaskSave(key, data, loadTask))
+        onEditTaskSave: (key, data, loadTask) => dispatch(editTaskSave(key, data, loadTask)),
+        onDeleteTask: ( key, load ) => dispatch(deleteTask(key, load ))
     }
 }
  

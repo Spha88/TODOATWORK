@@ -8,5 +8,6 @@ export {
     addTask, 
     editTaskStart, 
     editingTaskContent, 
-    editTaskSave 
+    editTaskSave,
+    deleteTask
 } from './editTaskActions';
