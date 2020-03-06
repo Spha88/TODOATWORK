@@ -7,6 +7,8 @@
     margin: 10px auto;
     transition: all 1s;
     cursor: pointer;
+    max-height: 200px;
+    overflow: hidden;
 }
 
 .Task:hover {
@@ -32,7 +34,6 @@
     border-top: 1px solid rgb(228, 228, 228);
     margin-top: 15px;
     transition: all 1s;
-    position: relative;
 }
 
 .openDetails {

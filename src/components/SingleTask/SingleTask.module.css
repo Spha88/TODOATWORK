@@ -1,0 +1,9 @@
+.SingleTask {
+    padding: 10px 20px;
+    max-height: 85%;
+    overflow: auto;
+}
+
+.SingleTask h4 {
+    margin-top: 0;
+}

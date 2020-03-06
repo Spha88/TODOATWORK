@@ -4,6 +4,7 @@ import Auth from '../Auth/Auth';
 import classes from './TasklistContainer.module.css';
 import TaskList from '../../components/TaskLists/TaskList';
 import Header from '../Header/Header';
+import SingleTask from '../../components/SingleTask/SingleTask';
 
 class TodoList extends Component {
     state = { 
@@ -15,7 +16,8 @@ class TodoList extends Component {
                 <Header />
                 <Switch>    
                     <Route path="/task-list" component={TaskList} />
-                    <Route path="/" component={Auth} />
+                    <Route path="/" exact component={Auth} />
+                    <Route path="/single/:title/:details" exact component={SingleTask} />
                 </Switch>
             </div>
          );

@@ -3,6 +3,7 @@ import classes from './Task.module.css';
 import OptionsIcon from '../../UI/OptionsIcon/OptionsIcon';
 import Options from '../../Options/Options';
 import OpenTaskBtn from '../../UI/OpenTaskBtn/OpenTaskBtn';
+import { Link } from 'react-router-dom';
 
 class Task extends Component {
 
@@ -43,8 +44,6 @@ class Task extends Component {
 
     render(){
 
-        
-
         let mainClasses = [classes.Main];
         if(this.state.openDetails === true) {
             mainClasses.push(classes.openDetails);
@@ -53,7 +52,7 @@ class Task extends Component {
         let viewTask = '';
         if(this.state.longText){
             console.log('text is too long')
-            viewTask = <OpenTaskBtn />
+            viewTask = <Link to={`/single/${this.props.title}/${this.props.details}`} ><OpenTaskBtn /></Link>
         }
 
         return (
