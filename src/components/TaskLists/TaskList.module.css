@@ -1,6 +1,6 @@
 .TaskListHolder {
     position: absolute;
-    height: 90%;
+    height: 100%;
     bottom: 0;
     left: 0;
     width: 100%;
@@ -8,11 +8,20 @@
     overflow: hidden;
     box-sizing: border-box;
 }
+.TaskListHolder h2 {
+    position: absolute;
+    top: 0;
+    z-index: 20;
+    width: 100%;
+    height: 10%;
+    padding-left: 20px;
+}
 .TaskList {
     list-style: none;
     position: relative;
     padding: 10px;
-    height: 100%;
+    top: 10%;
+    height: 90%;
     overflow-y: auto;
     padding-bottom: 20%;
     /* border: 1px solid yellow; */

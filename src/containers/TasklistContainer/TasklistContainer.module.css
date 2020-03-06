@@ -21,11 +21,3 @@
         margin: 0;
     }
 }
-
-.TodoListContainer h2 {
-    position: absolute;
-    top: 0;
-    z-index: 20;
-    width: 100%;
-    padding-left: 20px;
-}
