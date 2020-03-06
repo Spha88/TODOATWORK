@@ -66,8 +66,6 @@ class TaskList extends Component {
         return ( 
             <div className={classes.TaskListHolder}>
 
-                <h2>Tasks</h2>
-
                 <ul className={classes.TaskList}> { taskList } </ul>
                 
                 <AddTaskBtn openAddTaskModal={this.props.onOpenModal} />

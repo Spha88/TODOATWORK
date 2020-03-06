@@ -10,7 +10,6 @@
     height: 90vh;
     min-height: 100%;
     position: relative;
-    /* border: 3px solid pink; */
 }
 
 @media only screen and (max-width: 768px ){

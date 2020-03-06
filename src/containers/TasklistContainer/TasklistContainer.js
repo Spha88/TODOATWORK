@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import Auth from '../Auth/Auth';
 import classes from './TasklistContainer.module.css';
 import TaskList from '../../components/TaskLists/TaskList';
+import Header from '../Header/Header';
 
 class TodoList extends Component {
     state = { 
@@ -11,12 +12,11 @@ class TodoList extends Component {
     render() { 
         return ( 
             <div className={classes.TodoListContainer} >
-                
-                <Switch>
+                <Header />
+                <Switch>    
                     <Route path="/task-list" component={TaskList} />
                     <Route path="/" component={Auth} />
                 </Switch>
-                
             </div>
          );
     }
