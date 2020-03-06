@@ -2,12 +2,18 @@ import React, { Component } from 'react';
 import classes from './Task.module.css';
 import OptionsIcon from '../../UI/OptionsIcon/OptionsIcon';
 import Options from '../../Options/Options';
+import OpenTaskBtn from '../../UI/OpenTaskBtn/OpenTaskBtn';
 
 class Task extends Component {
 
     state = {
         openDetails: false,
-        openOptions: false
+        openOptions: false,
+        longText: false
+    }
+
+    componentDidMount(){
+        this.openTask(this.props.details);
     }
 
     openDetailsHandler = (e) => {
@@ -27,11 +33,27 @@ class Task extends Component {
         }
     }
 
+    openTask = (taskDetails) => {
+        if( taskDetails.length > 100 ){
+            this.setState({ longText: true })
+            console.dir(taskDetails.length);
+        }
+        
+    }
+
     render(){
+
+        
 
         let mainClasses = [classes.Main];
         if(this.state.openDetails === true) {
             mainClasses.push(classes.openDetails);
+        }
+
+        let viewTask = '';
+        if(this.state.longText){
+            console.log('text is too long')
+            viewTask = <OpenTaskBtn />
         }
 
         return (
@@ -50,6 +72,7 @@ class Task extends Component {
             </header>
             <main className={mainClasses.join(' ')}>
                 <p>{this.props.details}</p>
+                {viewTask}
             </main>
         </li>
     );

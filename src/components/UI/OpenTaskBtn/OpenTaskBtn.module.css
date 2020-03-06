@@ -1,0 +1,34 @@
+.ObenTaskBtnContainer {
+    width: 100%;
+    position: absolute;
+    background: rgb(255,255,255);
+    background: linear-gradient(180deg, rgba(255,255,255,0.27494747899159666) 0%, rgba(255,255,255,1) 80%, rgba(255,255,255,1) 100%);
+    bottom: 0;
+    padding: 10px 5px 5px 5px;
+}
+
+.AddTask {
+    padding: 5px 15px;
+    border-radius: 4px;
+    background-color: rgb(246, 246, 246);
+    border: 1px solid rgb(228, 228, 228);
+    display: block;
+    transition: all 1s;
+    cursor: pointer;
+    box-sizing: border-box;
+    margin: 0 auto;
+    outline: none;
+    font-size: .8em;
+}
+
+.AddTask:hover {
+    -webkit-box-shadow: 3px 3px 5px 1px rgba(0,0,0,0.31);
+    -moz-box-shadow: 3px 3px 5px 1px rgba(0,0,0,0.31);
+    box-shadow: 3px 3px 5px 1px rgba(0,0,0,0.31);
+    background-color: #fff;
+}
+
+.AddTask:hover header div {
+    background-color: rgb(85, 116, 253);
+    color: rgb(228, 228, 228);
+}
