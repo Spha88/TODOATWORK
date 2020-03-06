@@ -1,6 +1,7 @@
 
 export const AUTH_START = 'AUTH_START';
 export const AUTH_SIGN_IN = 'AUTH_SIGN_IN';
+export const LOGOUT = 'LOGOUT';
 
 export const LOADING_TASKS_START = 'LOADING_TASKS_START';
 export const LOADING_TASKS_COMPLETE = 'LOADING_TASKS_COMPLETE';

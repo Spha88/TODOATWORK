@@ -1,4 +1,4 @@
-export { auth } from './authAction';
+export { auth, logOut } from './authAction';
 
 export { loadTask } from './taskListAction';
 
@@ -11,3 +11,4 @@ export {
     editTaskSave,
     deleteTask
 } from './editTaskActions';
+

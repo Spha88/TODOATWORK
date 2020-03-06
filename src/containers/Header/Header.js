@@ -1,30 +1,35 @@
 import React, { Component } from 'react';
 import classes from './Header.module.css';
 import SubmitBtn from '../../components/UI/SubmitBtn/SubmitBtn';
-import { withRouter, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { logOut } from '../../store/actions/index';
 
 class Header extends Component {
 
-    state = {
-        redierect: false
-    }
-
-    logOut = () => {
-        console.log('clicked');
-        this.setState({redierect: true});
-    }
-
     render() { 
-        if(this.state.redierect){
-            return <Redirect to="/" />;
-        }
+
         return ( 
             <header className={classes.Header}>
                 <h2>Task</h2>
-                <SubmitBtn clicked={ () => this.props.history.push('/') } label="Log out" /> 
+                { this.props.signIn ? (
+                    <Link to="/">
+                        <SubmitBtn label="Log out" click={this.props.onLogOut}/>
+                    </Link>) : null }
             </header>
         );
     }
 }
+const mapStateToProps = state => {
+    return {
+        signIn: state.auth.signIn
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onLogOut: () => dispatch(logOut())
+    }
+}
  
-export default withRouter(Header);
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

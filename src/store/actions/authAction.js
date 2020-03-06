@@ -38,3 +38,10 @@ export const auth = (userInfo) => {
             })
     }
 }
+
+
+export const logOut = () => {
+    return {
+        type: actionTypes.LOGOUT
+    }
+}

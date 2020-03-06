@@ -5,7 +5,7 @@ import AddBtn from '../AddBtn/AddBtn';
 const submitBtn = (props) =>  {
 
     return (
-        <button className={classes.SubmitBtn} onClick={props.clicked}> {props.label} <AddBtn /></button>
+        <button className={classes.SubmitBtn} onClick={props.click}> {props.label} <AddBtn /></button>
     );
 
 }
