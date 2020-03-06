@@ -56,8 +56,7 @@ class Auth extends Component {
         }
         return ( 
             <div className={classes.Auth}>
-                <h2 className={classes.LogInHeading}>Log in</h2>
-                <p>{this.props.signedIn ? 'You have logged in' : 'you need to log in'}</p>
+                <h4 className={classes.LogInHeading}>Log in</h4>
                 <form className={classes.Form} onSubmit={this.onSignInHandler}>
                     <TextField
                         onChange = { this.onInputChangeHandler }
