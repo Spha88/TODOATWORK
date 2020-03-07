@@ -7,8 +7,12 @@
     margin: 10px auto;
     transition: all 1s;
     cursor: pointer;
-    max-height: 200px;
+    height: 50px;
     overflow: hidden;
+}
+
+.expandForDetails {
+    height: 200px;
 }
 
 .Task:hover {

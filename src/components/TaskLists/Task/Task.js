@@ -10,6 +10,7 @@ class Task extends Component {
     state = {
         openDetails: false,
         openOptions: false,
+        showOptions: false,
         longText: false
     }
 
@@ -17,21 +18,26 @@ class Task extends Component {
         this.openTask(this.props.details);
     }
 
-    openDetailsHandler = (e) => {
+    openDetailsHandler = (e, target) => {
         if(e.target.localName === 'span' || e.target.localName === 'div') {
             return;
         };
         this.setState({openDetails: !this.state.openDetails});
     }
 
-    openOptionsHandler = () => {
+    openOptionsHandler = (e) => {
         this.setState({openOptions: !this.state.openOptions});
     }
 
     openOptionsResetHandler = () => {
         if(this.state.openOptions) {
-            this.setState({openOptions: false});
+            this.setState({openOptions: false, showOptions: false});
         }
+        this.setState({showOptions: false})
+    }
+
+    showOptionsIcon = () => {
+        this.setState({showOptions: true});
     }
 
     openTask = (taskDetails) => {
@@ -45,25 +51,31 @@ class Task extends Component {
     render(){
 
         let mainClasses = [classes.Main];
+        let taskClasses = [classes.Task];
         if(this.state.openDetails === true) {
             mainClasses.push(classes.openDetails);
+            taskClasses.push(classes.expandForDetails);
         }
 
         let viewTask = '';
         if(this.state.longText){
-            console.log('text is too long')
             viewTask = <Link to={`/single/${this.props.title}/${this.props.details}`} ><OpenTaskBtn /></Link>
         }
 
         return (
         <li 
-            className={classes.Task} key={this.props.uniqueKey} 
+            className={taskClasses.join(' ')} 
+            key={this.props.uniqueKey}
+            onMouseEnter={this.showOptionsIcon} 
             onMouseLeave={this.openOptionsResetHandler} 
-            onClickCapture={ this.openDetailsHandler }>
+            onClick={ this.openDetailsHandler }>
 
             <header>
                 <h5 className={classes.Content}>{this.props.title}</h5> 
-                <OptionsIcon click={this.openOptionsHandler} optionsOpen={!this.state.openOptions}/> 
+                <OptionsIcon
+                    show = {this.state.showOptions} 
+                    click={this.openOptionsHandler} 
+                    optionsOpen={!this.state.openOptions}/> 
                 <Options 
                     open={this.state.openOptions}
                     edit={this.props.edit}  

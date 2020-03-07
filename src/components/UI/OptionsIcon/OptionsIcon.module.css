@@ -1,5 +1,5 @@
 .OptionsIcon {
-    display: flex;
+    display: none;
     width: 30px;
     height: 15px;
     border: 1px solid rgb(228, 228, 228);
@@ -9,6 +9,12 @@
     transition: all 1s;
     box-sizing: border-box;
 }
+
+.OptionsIconShow {
+    display: flex;
+}
+
+
 
 .HideOptionsIcon {
     display: none;
