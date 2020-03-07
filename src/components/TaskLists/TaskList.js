@@ -53,6 +53,7 @@ class TaskList extends Component {
                     return (
                         <Task
                             key = {taskKey}
+                            uniqueKey = {taskKey}
                             title={tasks[taskKey].title}
                             details={tasks[taskKey].details}
     

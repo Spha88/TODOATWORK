@@ -7,10 +7,9 @@ const options = (props) => {
     if(!props.optionsOpen){
         optionsIconClasses.push(classes.HideOptionIcon)
     }
-    
+
     if(props.show){
         optionsIconClasses.push(classes.OptionsIconShow);
-        console.log('Options icon can now be made visible');
     }
 
     return (

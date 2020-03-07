@@ -43,7 +43,7 @@ class Task extends Component {
     openTask = (taskDetails) => {
         if( taskDetails.length > 100 ){
             this.setState({ longText: true })
-            console.dir(taskDetails.length);
+            // console.dir(taskDetails.length);
         }
         
     }
@@ -59,7 +59,7 @@ class Task extends Component {
 
         let viewTask = '';
         if(this.state.longText){
-            viewTask = <Link to={`/single/${this.props.title}/${this.props.details}`} ><OpenTaskBtn /></Link>
+            viewTask = <Link to={`/single/${this.props.uniqueKey}`} ><OpenTaskBtn /></Link>
         }
 
         return (

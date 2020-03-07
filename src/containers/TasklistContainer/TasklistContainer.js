@@ -17,7 +17,7 @@ class TodoList extends Component {
                 <Switch>    
                     <Route path="/task-list" component={TaskList} />
                     <Route path="/" exact component={Auth} />
-                    <Route path="/single/:title/:details" exact component={SingleTask} />
+                    <Route path="/single/:taskKey" exact component={SingleTask} />
                 </Switch>
             </div>
          );
