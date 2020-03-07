@@ -62,6 +62,14 @@ class Task extends Component {
             viewTask = <Link to={`/single/${this.props.uniqueKey}`} ><OpenTaskBtn /></Link>
         }
 
+        let task = this.props.title;
+        if(task.length > 45 ) {
+            task = task.slice(0, 45); //cut the string into 45 letters
+            console.log(task);
+            task = task.slice( 0,task.lastIndexOf(' ') ).concat(' ...') //remove the last par or words which are not cut nicely
+            console.log(task);
+        }
+
         return (
         <li 
             className={taskClasses.join(' ')} 
@@ -71,7 +79,7 @@ class Task extends Component {
             onClick={ this.openDetailsHandler }>
 
             <header>
-                <h5 className={classes.Content}>{this.props.title}</h5> 
+                <h5 className={classes.Content}>{task}</h5> 
                 <OptionsIcon
                     show = {this.state.showOptions} 
                     click={this.openOptionsHandler} 
