@@ -1,15 +1,20 @@
 import React, { Component } from 'react';
-import Task from './Task/Task';
-import AddTaskBtn from '../AddTaskBtn/AddTaskBtn';
-import Loading from '../UI/Loading/Loading';
-import AddTaskForm from '../../components/AddTaskForm/AddTaskForm';
 import axios from 'axios';
-import classes from './TaskList.module.css';
 import { connect } from 'react-redux';
 import { 
     loadTask, addTask, openModal, closeModal, editTaskStart, 
     editingTaskContent, editTaskSave, deleteTask
 } from '../../store/actions/index';
+
+import Task from './Task/Task';
+import AddTaskBtn from '../AddTaskBtn/AddTaskBtn';
+import Loading from '../UI/Loading/Loading';
+import AddTaskForm from '../../components/AddTaskForm/AddTaskForm';
+import Message from '../UI/Message/Message';
+
+import classes from './TaskList.module.css';
+
+
 
 
 class TaskList extends Component {
@@ -41,13 +46,13 @@ class TaskList extends Component {
         let taskList = <Loading />;
 
         if (this.props.errorLoading === true ) {
-            taskList = <p>Error loading please make sure you are connected to the internet</p>
+            taskList = <Message message="Error loading please make sure you are connected to the internet" />
         }
         
         if( this.props.loading === false && this.props.errorLoading === false ) {
             let tasks = this.props.tasks;
             if ( tasks === null ){
-                taskList = (<p>No task found, add a task</p>)
+                taskList = <Message class="Danger" click={this.props.onOpenModal} message="No task found, add a task" />
             } else {
                 taskList = Object.keys(tasks).map( taskKey => {
                     return (
