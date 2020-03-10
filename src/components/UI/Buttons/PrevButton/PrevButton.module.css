@@ -15,6 +15,16 @@
     box-shadow: 1px 3px 5px 0px rgba(94, 94, 94, 0.44);
     cursor: pointer;
 }
+.disabled {
+    border: 1px salmon solid;
+}
+
+.PrevButton.disabled:hover {
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    cursor: default;
+}
 
 .PrevButton img {
     width: 20px;

@@ -21,7 +21,7 @@ class SingleTask extends Component {
             this.setState({current: this.state.current + 1 });
         }
     }
-    
+
     prevItem = () => {
         if(this.state.current > 0 ) {
             this.setState({current: this.state.current - 1})
@@ -43,6 +43,8 @@ class SingleTask extends Component {
         }
 
         let tasks = this.props.tasks
+
+        console.log(this.state);
 
         return (
             <div className={classes.SingleTask} >

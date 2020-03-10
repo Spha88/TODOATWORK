@@ -16,6 +16,18 @@
     cursor: pointer;
 }
 
+.disabled {
+    border: 1px salmon solid;
+}
+
+.NextButton.disabled:hover {
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    border: 1px salmon solid;
+    cursor: default;
+}
+
 .NextButton img {
     width: 20px;
 }
