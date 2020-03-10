@@ -1,0 +1,12 @@
+.SingleTaskNav {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    width: 100%;
+    top: 10%;
+    background: #fff;
+    padding: 10px 20px;
+    left: 0;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}

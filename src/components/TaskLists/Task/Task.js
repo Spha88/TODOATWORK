@@ -65,9 +65,7 @@ class Task extends Component {
         let task = this.props.title;
         if(task.length > 45 ) {
             task = task.slice(0, 45); //cut the string into 45 letters
-            console.log(task);
             task = task.slice( 0,task.lastIndexOf(' ') ).concat(' ...') //remove the last par or words which are not cut nicely
-            console.log(task);
         }
 
         return (

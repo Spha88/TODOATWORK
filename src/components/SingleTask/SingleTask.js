@@ -1,35 +1,70 @@
-import React from 'react';
-import classes from './SingleTask.module.css';
+import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
+import classes from './SingleTask.module.css';
 
+import BackBtn from '../UI/BackBtn/BackBtn';
+import SingleTaskNav from './SingleTaskNav/SingleTaskNav';
 
-const SingleTask = (props) => {
-
-    console.log(props);
-
-    const backToPrev = () => {
-        props.history.goBack();
+class SingleTask extends Component {
+    state = {
+        tasks: null,
+        current: null
     }
 
-    if( !props.tasks ){
-       return <Redirect to="/task-list" />;
+    backToPrev = () => { //back to task list when done viewing the tasks
+        this.props.history.goBack();
     }
 
-    let key = props.match.params.taskKey;
-    let tasks = props.tasks
-    console.log('Key ' + key + ' and the tasks ' + tasks[key].title );
+    nextItem = () => {
+        if(this.state.current < this.state.tasks.length - 1){
+            this.setState({current: this.state.current + 1 });
+        }
+    }
+    
+    prevItem = () => {
+        if(this.state.current > 0 ) {
+            this.setState({current: this.state.current - 1})
+        }
+    }
 
-    return (
-        <div className={classes.SingleTask} >
-            <h4>{tasks[key].title}</h4>
-            <p>{tasks[key].details}</p>
-            <button onClick={ backToPrev }>Go Back</button>
-        </div>
-    );
+    prepareTasks = (tasks) => {
+        let key = this.props.match.params.taskKey;
+        let taskArray = Object.keys(tasks).map( key => {
+            return key
+        })
+        this.setState({tasks: taskArray, current: taskArray.indexOf(key)});
+    }
+
+    render() {
+
+        if( !this.props.tasks ){ //redirect bact to task list if there are no tasks
+            return <Redirect to="/task-list" />;
+        }
+
+        let tasks = this.props.tasks
+
+        return (
+            <div className={classes.SingleTask} >
+                {this.state.tasks ? <SingleTaskNav 
+                    prev = {this.prevItem}
+                    next = {this.nextItem}
+                    current = {this.state.current + 1}
+                    numberOfTask = {this.state.tasks.length} /> : null }
+                <h4>{this.state.tasks? tasks[this.state.tasks[this.state.current]].title : null }</h4>
+                <p>{this.state.tasks? tasks[this.state.tasks[this.state.current]].details : null }</p>
+                <BackBtn clicked={ this.backToPrev } label="Back to Task List" />
+            </div>
+        );
+    }
+
+    componentDidMount(){
+        if (this.props.tasks) this.prepareTasks(this.props.tasks);
+    }
 }
 
 const mapStateToProps = state => {
+    
     return {
         tasks: state.taskList.tasks
     }

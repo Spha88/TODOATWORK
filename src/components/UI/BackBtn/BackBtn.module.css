@@ -1,0 +1,32 @@
+.BackBtn {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    height: 60px;
+    width: 100%;
+    margin: 0;
+    background: linear-gradient(180deg, 
+                rgba(255,255,255,0.27494747899159666) 0%,
+                rgba(255,255,255,1) 80%, 
+                rgba(255,255,255,1) 100%);
+}
+
+.BackBtn button {
+    border-radius: 4px;
+    background-color: rgb(246, 246, 246);
+    border: 1px solid rgb(228, 228, 228);
+    font-weight: 700;
+    padding: 10px;
+    margin: 10px;
+    outline: none;
+    transition: all 1s ease;
+}
+
+.BackBtn button:hover {
+    -webkit-box-shadow: 5px 5px 18px 0px rgba(0,0,0,0.44);
+    -moz-box-shadow: 5px 5px 18px 0px rgba(0,0,0,0.44);
+    box-shadow: 5px 5px 18px 0px rgba(0,0,0,0.44);
+    cursor: pointer;
+}

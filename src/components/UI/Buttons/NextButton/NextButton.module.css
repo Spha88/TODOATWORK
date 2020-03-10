@@ -1,0 +1,21 @@
+.NextButton {
+    background-color: transparent;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    display: flex;
+    padding: 3px 5px;
+    cursor: pointer;
+    transition: all .5s ease;
+}
+
+.NextButton:hover {
+    -webkit-box-shadow: 1px 3px 5px 0px rgba(94, 94, 94, 0.44);
+    -moz-box-shadow: 1px 3px 5px 0px rgba(94, 94, 94, 0.44);
+    box-shadow: 1px 3px 5px 0px rgba(94, 94, 94, 0.44);
+    cursor: pointer;
+}
+
+.NextButton img {
+    width: 20px;
+}
