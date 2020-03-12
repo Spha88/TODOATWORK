@@ -5,6 +5,7 @@ import classes from './SingleTask.module.css';
 
 import BackBtn from '../UI/BackBtn/BackBtn';
 import SingleTaskNav from './SingleTaskNav/SingleTaskNav';
+import TaskSlide from './TaskSlide/TaskSlide';
 
 class SingleTask extends Component {
     state = {
@@ -44,17 +45,22 @@ class SingleTask extends Component {
 
         let tasks = this.props.tasks
 
-        console.log(this.state);
-
         return (
             <div className={classes.SingleTask} >
+
                 {this.state.tasks ? <SingleTaskNav 
                     prev = {this.prevItem}
                     next = {this.nextItem}
                     current = {this.state.current + 1}
                     numberOfTask = {this.state.tasks.length} /> : null }
-                <h4>{this.state.tasks? tasks[this.state.tasks[this.state.current]].title : null }</h4>
-                <p>{this.state.tasks? tasks[this.state.tasks[this.state.current]].details : null }</p>
+
+                <TaskSlide 
+                    tasks={tasks}
+                    current={this.state.current}
+                    numberOfTasks={this.state.tasks ? this.state.tasks.length : null}
+                    key={this.props.match.params.taskKey} />
+
+
                 <BackBtn clicked={ this.backToPrev } label="Back to Task List" />
             </div>
         );
@@ -66,7 +72,7 @@ class SingleTask extends Component {
 }
 
 const mapStateToProps = state => {
-    
+
     return {
         tasks: state.taskList.tasks
     }

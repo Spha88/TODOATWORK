@@ -11,11 +11,13 @@ const singleTaskNav = (props) => {
 
     return ( 
         <nav className={classes.SingleTaskNav}>
-            <PrevButton click={props.prev} disabled={disablePrevButton} />
-            <span>
-                {props.current} of  { props.numberOfTask }
-            </span> 
-            <NextButton click={props.next} disabled={disableNextButton} />
+            <div>
+                <PrevButton click={props.prev} disabled={disablePrevButton} />
+                <span>
+                    {props.current} of  { props.numberOfTask }
+                </span> 
+                <NextButton click={props.next} disabled={disableNextButton} />
+            </div>
         </nav>
      );
 }
